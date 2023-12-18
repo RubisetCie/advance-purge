@@ -1,0 +1,4 @@
+DPkg
+{
+Post-Invoke {"if [ -x /usr/local/bin/advancepurge ] && [ $(ps w -p $PPID | grep -E -c '(remove|purge)') != 1 ]; then /usr/local/bin/advancepurge; else exit 0; fi";};
+};
