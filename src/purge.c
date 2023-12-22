@@ -103,7 +103,7 @@ void purgeLocale(Config *config, int local, int verbose)
 			continue;
 
 		if (verbose)
-			printf("Deleting: %s\n", dir->d_name);
+			printf("Deleting: %s/%s\n", path, dir->d_name);
 
 		if (!deleteDir(dir->d_name))
 			fputs("Error removing the directory\n", stderr);
