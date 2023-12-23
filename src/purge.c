@@ -70,10 +70,7 @@ static int deleteDir(const char *dir)
 			case FTS_SLNONE:
 			case FTS_DEFAULT:
 				if (remove(cur->fts_accpath) < 0)
-				{
-					fprintf(stderr, "Error while remove file: %s\n", strerror(cur->fts_errno));
 					retval = 0;
-				}
 				break;
 		}
 	}
