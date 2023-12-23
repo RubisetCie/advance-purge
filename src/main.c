@@ -23,7 +23,7 @@ int main(int argc, const char **argv)
 {
 	Config config;
 	FILE *confFile;
-	unsigned int i = 1;
+	size_t j, i = 1;
 	int local = 0;
 	int verbose = 0;
 	int retval = 0;
@@ -33,19 +33,44 @@ int main(int argc, const char **argv)
 	{
 		const char *arg = argv[i++];
 
-		if (strcmp(arg, "-?") == 0 ||
-			strcmp(arg, "-h") == 0 ||
-			strcmp(arg, "--help") == 0)
+		if (arg[0] == '-')
 		{
-			help(argv[0]);
-			return 0;
+			/* Handle single letter arguments */
+			if (arg[1] != '-')
+			{
+				j = 1;
+				while (arg[j] != '\0')
+				{
+					switch (arg[j])
+					{
+						case '?':
+						case 'h':
+							help(argv[0]);
+							return 0;
+						case 'l':
+							local = 1;
+							break;
+						case 'v':
+							verbose = 1;
+							break;
+					}
+					j++;
+				}
+			}
+			/* Handle long words arguments */
+			else
+			{
+				if (strcmp(arg, "--help") == 0)
+				{
+					help(argv[0]);
+					return 0;
+				}
+				else if (strcmp(arg, "--local") == 0)
+					local = 1;
+				else if (strcmp(arg, "--verbose") == 0)
+					verbose = 1;
+			}
 		}
-		else if (strcmp(arg, "-l") == 0 ||
-			strcmp(arg, "--local") == 0)
-			local = 1;
-		else if (strcmp(arg, "-v") == 0 ||
-			strcmp(arg, "--verbose") == 0)
-			verbose = 1;
 	}
 
 	/* Open the configuration file if exists */
