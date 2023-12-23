@@ -9,15 +9,15 @@
 
 #include "config.h"
 
-void purgeLocale(Config *config, int local, int verbose);
-void purgeCupsTemplates(int local, int verbose);
-void purgeGnomeHelp(int local, int verbose);
-void purgeKdeHelp(int local, int verbose);
-void purgeHelp(int local, int verbose);
+void purgeLocale(const Config *config, int local, int verbose);
+void purgeCups(const Config *config, int local, int verbose);
+void purgeManual(const Config *config, int local, int verbose);
+void purgeHelp(const Config *config, int local, int verbose);
 
 void deleteLocale(int local, int verbose);
-void deleteGnomeHelp(int local, int verbose);
-void deleteKdeHelp(int local, int verbose);
+void deleteCups(int local, int verbose);
+void deleteManual(int local, int verbose);
 void deleteHelp(int local, int verbose);
+void deleteDoc(int local, int verbose);
 
 #endif

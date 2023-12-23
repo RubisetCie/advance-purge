@@ -13,11 +13,11 @@
 #define CAT_OPERATIONS "[Operations]"
 #define CAT_LOCALES    "[Locales]"
 
-#define OP_LOCALES        "locale"
-#define OP_CUPS_TEMPLATES "cups-templates"
-#define OP_HELP_GNOME     "help-gnome"
-#define OP_HELP_KDE       "help-kde"
-#define OP_HELP           "help"
+#define OP_LOCALES     "locale"
+#define OP_MANUAL      "manual"
+#define OP_CUPS        "cups"
+#define OP_HELP        "help"
+#define OP_DOC         "doc"
 
 /* Configuration category during reading process */
 typedef enum ConfigCategory
@@ -127,10 +127,10 @@ static void readOperation(const char *line, ssize_t len, Config *config, int ver
 
 	/* Test the operation name */
 	COMPARE_OPERATION(line, OP_LOCALES, len, i, config->purgeLocale, verbose);
-	COMPARE_OPERATION(line, OP_CUPS_TEMPLATES, len, i, config->purgeCupsTemplates, verbose);
-	COMPARE_OPERATION(line, OP_HELP_GNOME, len, i, config->purgeHelpGnome, verbose);
-	COMPARE_OPERATION(line, OP_HELP_KDE, len, i, config->purgeHelpKde, verbose);
+	COMPARE_OPERATION(line, OP_MANUAL, len, i, config->purgeManual, verbose);
+	COMPARE_OPERATION(line, OP_CUPS, len, i, config->purgeCups, verbose);
 	COMPARE_OPERATION(line, OP_HELP, len, i, config->purgeHelp, verbose);
+	COMPARE_OPERATION(line, OP_DOC, len, i, config->purgeDoc, verbose);
 
 #undef COMPARE_OPERATION
 }
@@ -222,7 +222,7 @@ END:
 }
 
 /* Check if a locale is present in the configuration data structure */
-int configCheck(Config *config, const char *locale)
+int configCheck(const Config *config, const char *locale)
 {
 	Locale *loc = config->locale;
 	do

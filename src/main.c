@@ -60,10 +60,10 @@ int main(int argc, const char **argv)
 	config.locale->locale = NULL;
 	config.locale->next = NULL;
 	config.purgeLocale = FILTER;
-	config.purgeCupsTemplates = FILTER;
-	config.purgeHelpGnome = FILTER;
-	config.purgeHelpKde = FILTER;
+	config.purgeManual = FILTER;
+	config.purgeCups = FILTER;
 	config.purgeHelp = FILTER;
+	config.purgeDoc = ON;
 
 	/* Read the configuration file */
 	if (!configRead(confFile, &config, verbose))
@@ -80,14 +80,23 @@ int main(int argc, const char **argv)
 		else if (config.purgeLocale == ON)
 			deleteLocale(local, verbose);
 
-		if (config.purgeCupsTemplates == FILTER)
-			purgeCupsTemplates(local, verbose);
-		if (config.purgeHelpGnome == FILTER)
-			purgeGnomeHelp(local, verbose);
-		if (config.purgeHelpKde == FILTER)
-			purgeKdeHelp(local, verbose);
+		if (config.purgeCups == FILTER)
+			purgeCups(&config, local, verbose);
+		else if (config.purgeCups == ON)
+			deleteCups(local, verbose);
+
+		if (config.purgeManual == FILTER)
+			purgeManual(&config, local, verbose);
+		else if (config.purgeManual == ON)
+			deleteManual(local, verbose);
+
 		if (config.purgeHelp == FILTER)
-			purgeHelp(local, verbose);
+			purgeHelp(&config, local, verbose);
+		else if (config.purgeHelp == ON)
+			deleteHelp(local, verbose);
+
+		if (config.purgeDoc != OFF)
+			deleteDoc(local, verbose);
 	}
 
 	/* Frees the configuration structure */

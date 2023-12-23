@@ -28,15 +28,15 @@ typedef struct Locale
 typedef struct Config
 {
 	PurgeType purgeLocale;
-	PurgeType purgeCupsTemplates;
-	PurgeType purgeHelpGnome;
-	PurgeType purgeHelpKde;
+	PurgeType purgeManual;
+	PurgeType purgeCups;
 	PurgeType purgeHelp;
+	PurgeType purgeDoc;
 	struct Locale *locale;
 } Config;
 
 int configRead(FILE *file, Config *config, int verbose);
-int configCheck(Config *config, const char *locale);
+int configCheck(const Config *config, const char *locale);
 
 void localeFree(Locale *locale, int verbose);
 
