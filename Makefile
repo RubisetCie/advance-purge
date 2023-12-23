@@ -2,7 +2,7 @@
 CC = gcc
 
 # Compiler flags
-override CFLAGS += -ansi
+override CFLAGS += -ansi -D_DEFAULT_SOURCE
 
 # Linker flags
 override LDFLAGS +=
