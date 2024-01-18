@@ -47,7 +47,7 @@ static int deleteDir(const char *dir)
 	FTSENT *cur;
 
 	/* Cast needed although "fts_open" does not modify the argument */
-	char *files[] = { (char*) dir, NULL };
+	char *const files[] = { (char*)dir, NULL };
 
     if (!(ftsp = fts_open(files, FTS_NOCHDIR | FTS_PHYSICAL | FTS_XDEV, NULL)))
 	{
