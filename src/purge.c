@@ -98,7 +98,7 @@ static void filterDirectory(const Config *config, const char *path, const char *
 	/* Change the working directory */
 	if (chdir(path) != 0)
 	{
-		fputs("Error while setting the working directory %s\n", stderr);
+		fputs("Error while setting the working directory\n", stderr);
 		goto END;
 	}
 
