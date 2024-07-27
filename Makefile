@@ -24,8 +24,8 @@ $(TARGET): $(SRC_FILES)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 install:
-	mkdir -p $(PREFIX)
-	cp $(TARGET) $(PREFIX)/bin
+	mkdir -p $(PREFIX)/bin
+	cp $(TARGET) $(PREFIX)/bin/
 
 uninstall:
 	rm -f $(PREFIX)/bin/$(TARGET)
